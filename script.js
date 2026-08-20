@@ -2,10 +2,12 @@ function prosesDiagnosa() {
     // 1. Ambil data dari Form
     const nama = document.getElementById("nama").value;
     const usia = parseInt(document.getElementById("usia").value);
-    const gender = document.getElementById("gender").value;
+    const gender = document.getElementById("gender").value.toLowerCase(); // Diubah ke huruf kecil agar aman
     const berat = parseFloat(document.getElementById("berat").value);
     const tinggi = parseFloat(document.getElementById("tinggi").value);
-    const aktivitas = parseFloat(document.getElementById("aktivitas").value);
+    
+    // Perubahan 1: Jangan pakai parseFloat dulu di sini, ambil teksnya saja
+    const aktivitas = document.getElementById("aktivitas").value; 
 
     // Validasi input
     if (!nama || !usia || !berat || !tinggi) {
@@ -17,12 +19,46 @@ function prosesDiagnosa() {
     // ALGORITMA 1: HARRIS-BENEDICT (Menghitung Kalori)
     // ==========================================
     let bmr = 0;
-    if (gender === "pria") {
+    if (gender === "pria" || gender === "laki-laki") {
         bmr = 66.5 + (13.75 * berat) + (5.003 * tinggi) - (6.775 * usia);
     } else {
         bmr = 655.1 + (9.563 * berat) + (1.850 * tinggi) - (4.676 * usia);
     }
-    const kebutuhanKaloriNormal = Math.round(bmr * aktivitas);
+
+    // ==========================================
+    // PENENTUAN FAKTOR AKTIVITAS (Berdasarkan Gender)
+    // ==========================================
+    let faktorAktivitas = 0;
+
+    if (gender === "pria" || gender === "laki-laki") {
+        if (aktivitas === "Sangat Ringan") {
+            faktorAktivitas = 1.30;
+        } else if (aktivitas === "Ringan") {
+            faktorAktivitas = 1.65;
+        } else if (aktivitas === "Sedang") {
+            faktorAktivitas = 1.76;
+        } else if (aktivitas === "Berat") {
+            faktorAktivitas = 2.10;
+        } else {
+            faktorAktivitas = 1.2; // Default jika error
+        }
+    } else {
+        // Untuk Wanita / Perempuan
+        if (aktivitas === "Sangat Ringan") {
+            faktorAktivitas = 1.30;
+        } else if (aktivitas === "Ringan") {
+            faktorAktivitas = 1.55;
+        } else if (aktivitas === "Sedang") {
+            faktorAktivitas = 1.70;
+        } else if (aktivitas === "Berat") {
+            faktorAktivitas = 2.00;
+        } else {
+            faktorAktivitas = 1.2; // Default jika error
+        }
+    }
+
+    // Hitung Kebutuhan Kalori menggunakan BMR * Faktor Aktivitas
+    const kebutuhanKaloriNormal = Math.round(bmr * faktorAktivitas);
 
     // ==========================================
     // ALGORITMA 2: CERTAINTY FACTOR (CF)
