@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pakar Gizi Obesitas</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Library untuk mengubah HTML ke Gambar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <div class="app-header">
+            <h1>🩺 Sistem Pakar Gizi</h1>
+            <p>Diagnosa Obesitas (Harris-Benedict & Certainty Factor)</p>
+        </div>
+
+        <div class="content-wrapper">
+            
+            <!-- PANEL KIRI: Tempat Input Data -->
+            <div class="left-panel">
+                <div class="input-section">
+                    <div class="input-box">
+                        <label>Nama Lengkap</label>
+                        <input type="text" id="nama" placeholder="Masukkan nama Anda...">
+                    </div>
+                    
+                    <div class="row-input">
+                        <div class="input-box">
+                            <label>Usia (Tahun)</label>
+                            <input type="number" id="usia" placeholder="Cth: 22">
+                        </div>
+                        <div class="input-box">
+                            <label>Jenis Kelamin</label>
+                            <select id="gender">
+                                <option value="pria">Pria</option>
+                                <option value="wanita">Wanita</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row-input">
+                        <div class="input-box">
+                            <label>Berat (kg)</label>
+                            <input type="number" id="berat" placeholder="Cth: 85">
+                        </div>
+                        <div class="input-box">
+                            <label>Tinggi (cm)</label>
+                            <input type="number" id="tinggi" placeholder="Cth: 165">
+                        </div>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Aktivitas Fisik (Untuk Kebutuhan Kalori)</label>
+                        <select id="aktivitas">
+                            <option value="1.2">Sangat Jarang (Tidak olahraga)</option>
+                            <option value="1.375">Jarang (Olahraga 1-3x / minggu)</option>
+                            <option value="1.55">Cukup (Olahraga 3-5x / minggu)</option>
+                            <option value="1.725">Aktif (Olahraga keras tiap hari)</option>
+                        </select>
+                    </div>
+
+                    <!-- Input Gejala untuk Certainty Factor -->
+                    <div class="cf-section">
+                        <label>Pola Hidup (Ceklis yang dialami):</label>
+                        <p class="cf-note">Variabel hitung Certainty Factor (CF)</p>
+                        
+                        <label class="checkbox-container">Sering makan cepat saji (Junk Food)
+                            <input type="checkbox" class="gejala" value="0.8">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="checkbox-container">Ada riwayat keluarga (Genetik) Obesitas
+                            <input type="checkbox" class="gejala" value="0.6">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="checkbox-container">Sering makan larut malam sebelum tidur
+                            <input type="checkbox" class="gejala" value="0.7">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="checkbox-container">Sering konsumsi makanan dan minuman manis berlebih
+                            <input type="checkbox" class="gejala" value="0.75">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                    <button onclick="prosesDiagnosa()" class="btn-primary">Mulai Diagnosa Pakar ✨</button>
+                </div>
+            </div> <!-- Akhir Panel Kiri -->
+
+            <!-- PANEL KANAN: Tempat Kartu Hasil -->
+            <div class="right-panel">
+                <div id="health-card" class="health-card hidden">
+                    <div class="card-header" id="card-header">
+                        <h2>Kartu Diagnosa Gizi</h2>
+                        <p id="hasil-nama" class="nama-user">-</p>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="result-grid">
+                            <div class="result-box">
+                                <span>Skor IMT</span>
+                                <strong id="hasil-imt">0.0</strong>
+                            </div>
+                            <div class="result-box">
+                                <span>Target Kalori</span>
+                                <strong id="hasil-kalori">0 Kcal</strong>
+                            </div>
+                        </div>
+
+                        <div class="cf-result" id="cf-result-box">
+                            <p id="teks-cf-hasil">Tingkat Kepastian (CF): <strong id="hasil-cf">0%</strong></p>
+                            <p>Status: <span id="hasil-kategori" class="status-badge">Normal</span></p>
+                        </div>
+
+                        <div class="recommendation-box" id="rek-box">
+                            <p id="hasil-rekomendasi">Hasil diagnosa dan rekomendasi pangan akan muncul di sini setelah Anda menekan tombol hitung.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="btn-simpan" onclick="simpanKeGaleri()" class="btn-secondary hidden">📸 Simpan ke Galeri</button>
+            </div> <!-- Akhir Panel Kanan -->
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

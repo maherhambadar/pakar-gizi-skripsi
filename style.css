@@ -1,0 +1,115 @@
+/* --- RESET & FONT --- */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+body {
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; padding: 20px;
+}
+
+/* KONTINER LEBAR UNTUK LAYOUT KIRI-KANAN */
+.app-container {
+    background-color: #ffffff; 
+    width: 100%; 
+    max-width: 950px; 
+    padding: 30px; 
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+.app-header { text-align: center; margin-bottom: 30px; }
+.app-header h1 { color: #2c3e50; font-size: 26px; font-weight: 700; }
+.app-header p { color: #7f8c8d; font-size: 14px; }
+
+/* --- GRID LAYOUT KIRI KANAN --- */
+.content-wrapper {
+    display: flex;
+    gap: 30px; 
+    align-items: flex-start; 
+}
+
+.left-panel { flex: 1; }
+.right-panel { flex: 1; width: 100%; }
+
+/* --- FORM INPUT --- */
+.input-section { display: flex; flex-direction: column; gap: 12px; }
+.row-input { display: flex; gap: 15px; }
+.input-box { width: 100%; }
+.input-box label { display: block; font-size: 13px; font-weight: 600; color: #34495e; margin-bottom: 5px; }
+.input-box input, .input-box select {
+    width: 100%; padding: 12px; border: none; background-color: #f4f6f9;
+    border-radius: 10px; font-size: 14px; color: #2c3e50;
+    transition: all 0.3s ease;
+}
+.input-box input:focus, .input-box select:focus { outline: none; background-color: #ffffff; box-shadow: 0 0 0 2px #bbdefb; }
+
+/* --- CF SECTION (CHECKBOX GEJALA) --- */
+.cf-section {
+    background-color: #fff9e6; border-left: 4px solid #f1c40f;
+    padding: 12px; border-radius: 10px; margin-top: 5px;
+}
+.cf-section label { font-weight: 600; font-size: 13px; color: #333; }
+.cf-note { font-size: 11px; color: #7f8c8d; margin-bottom: 8px; font-style: italic; }
+
+.checkbox-container {
+    display: block; position: relative; padding-left: 28px;
+    margin-bottom: 8px; cursor: pointer; font-size: 12px; font-weight: 500 !important; color: #4a5568;
+}
+.checkbox-container input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
+.checkmark {
+    position: absolute; top: 0; left: 0; height: 18px; width: 18px;
+    background-color: #e2e8f0; border-radius: 4px; transition: 0.2s;
+}
+.checkbox-container:hover input ~ .checkmark { background-color: #cbd5e0; }
+.checkbox-container input:checked ~ .checkmark { background-color: #3498db; }
+.checkmark:after { content: ""; position: absolute; display: none; }
+.checkbox-container input:checked ~ .checkmark:after { display: block; }
+.checkbox-container .checkmark:after {
+    left: 6px; top: 2px; width: 4px; height: 10px;
+    border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
+
+/* --- TOMBOL --- */
+.btn-primary, .btn-secondary {
+    width: 100%; padding: 15px; border: none; border-radius: 10px;
+    font-size: 15px; font-weight: 700; cursor: pointer; transition: transform 0.2s; margin-top: 5px;
+}
+.btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+.btn-primary:active { transform: scale(0.98); }
+.btn-secondary { background: #2c3e50; color: white; margin-top: 15px; }
+
+/* --- KARTU KESEHATAN (OUTPUT) --- */
+.health-card {
+    background-color: #ffffff; border-radius: 15px; overflow: hidden;
+    border: 1px solid #edf2f7; box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+.card-header { padding: 15px; text-align: center; color: white; background: #bdc3c7; }
+.card-header h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;}
+.nama-user { font-size: 22px; font-weight: 700; margin-top: 2px; }
+.card-body { padding: 20px; }
+
+/* Result Grid (IMT & Kalori) */
+.result-grid { display: flex; gap: 10px; margin-bottom: 15px; }
+.result-box {
+    flex: 1; background-color: #f8f9fa; padding: 12px;
+    border-radius: 10px; text-align: center; border: 1px solid #e2e8f0;
+}
+.result-box span { display: block; font-size: 11px; color: #718096; text-transform: uppercase; font-weight: 600; margin-bottom: 2px; }
+.result-box strong { font-size: 18px; color: #2d3748; }
+
+.cf-result { text-align: center; margin-bottom: 15px; font-size: 13px; }
+.status-badge { padding: 4px 12px; border-radius: 15px; color: white; font-weight: bold; font-size: 12px; }
+
+.recommendation-box {
+    background-color: #f0f4f8; padding: 15px; border-radius: 10px;
+    font-size: 13px; line-height: 1.6; color: #2d3748;
+}
+
+.hidden { display: none; }
+
+/* --- RESPONSIVE UNTUK HP --- */
+@media (max-width: 768px) {
+    .content-wrapper { flex-direction: column; }
+    .app-container { padding: 20px; }
+    .health-card { margin-top: 10px; }
+}
